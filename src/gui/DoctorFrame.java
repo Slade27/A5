@@ -27,7 +27,7 @@ public class DoctorFrame extends JFrame {
     public DoctorFrame(String name) {
         Doctor doc = DoctorMapAccess.dictionary().get(name);
         if (doc != null) {
-            setTitle(doc.getName() + " (" + doc + ")");
+            setTitle(doc.getName());
             setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             System.out.println(doc+ "HERE");
             DoctorPanel panel = new DoctorPanel(doc);

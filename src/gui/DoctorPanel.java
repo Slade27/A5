@@ -9,6 +9,8 @@ import javax.swing.*;
 import commands.AddPatient;
 import commands.DropDoctor;
 import commands.AssignDoctor;
+import containers.DoctorMapAccess;
+import containers.PatientMapAccess;
 import entities.Doctor;
 import entities.Patient;
 import entities.BasicDoctor;
@@ -46,34 +48,16 @@ public class DoctorPanel extends JPanel {
         ;
         add(new JLabel("Name: " + d.getName()));
 
-        //BedPanel bedPanel = new BedPanel(patient);
-        //add(bedPanel);
-        //bedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        //bedPanel.setMaximumSize(bedPanel.getPreferredSize());
-        JButton addButton = new JButton("Add patient");
-        addButton.setMaximumSize(addButton.getPreferredSize());
-        add(addButton);
-        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                PatientAddFrame frame = new PatientAddFrame();
-                frame.setLocation(300, 300);
-                frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                frame.setVisible(true);
-            }
-        });
-        add(Box.createVerticalGlue());
-
 
         // add an empty panel to force the add doctor and exit components to the bottom
         JPanel emptyPanel = new JPanel();
         add(emptyPanel);
         emptyPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-//        JPanel addDoctorPanel = addDoctorPanel(d);
-//        add(addDoctorPanel);
-//        addDoctorPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-//        addDoctorPanel.setMaximumSize(addDoctorPanel.getPreferredSize());      ADD THIS BACK
+        JPanel addDoctorPanel = addPatientPanel(d);
+        add(addDoctorPanel);
+        addDoctorPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        addDoctorPanel.setMaximumSize(addDoctorPanel.getPreferredSize());
 
         add(new JLabel("  ")); // blank line in the panel for spacing
         final JButton exitButton = new JButton("Exit");
@@ -124,28 +108,32 @@ public class DoctorPanel extends JPanel {
      * @param patient the current patient
      * @return a panel to associate a new doctor with this patient
      */
-//    private JPanel addPatientPanel(final Doctor doctor) {
-//        JPanel addDoctorPanel = new JPanel();
-//        addDoctorPanel.add(new JLabel("Add doctor"));
-//        final JTextField textField = new JTextField(10);
-//        addDoctorPanel.add(textField);
-//        textField.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent event) {
-//                String PatName = textField.getText();
-//                AddPatient addAssoc = new AddPatient();
-//                addAssoc.addPatient(PatName, patient.getHealthNumber());
-//                if (addAssoc.wasSuccessful()) {
-//                    // recreate the panel as it has changed
-//                    removeAll();
-//                    build(patient);
-//                    revalidate();
-//                } else {
-//                    JOptionPane.showMessageDialog(PatientPanel.this, addAssoc.getErrorMessage());
-//                }
-//            }
-//        });
-//        return addDoctorPanel;
-//    }
+
+    private JPanel addPatientPanel(final Doctor d) {
+        JPanel addPatientPanel = new JPanel();
+        addPatientPanel.add(new JLabel("Add Patient, Enter HN"));
+        final JTextField textField = new JTextField(10);
+        addPatientPanel.add(textField);
+        textField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+
+
+                String pat = textField.getText();
+                int healthnum = Integer.parseInt(pat);
+                AssignDoctor addAssoc = new AssignDoctor();
+                addAssoc.assignDoctor(d.getName(), healthnum);
+                if (addAssoc.wasSuccessful()) {
+                    // recreate the panel as it has changed
+                    removeAll();
+                    build(d);
+                    revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(DoctorPanel.this, addAssoc.getErrorMessage());
+                }
+            }
+        });
+        return addPatientPanel;
+    }
 
     public static final long serialVersionUID = 1;
 }
