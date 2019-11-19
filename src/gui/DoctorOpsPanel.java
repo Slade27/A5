@@ -61,6 +61,7 @@ public class DoctorOpsPanel extends JPanel {
         });
         add(Box.createVerticalGlue());
 
+
         // add a button to exit from the window containing this panel
         final JButton exitButton = new JButton("Exit");
         exitButton.setMaximumSize(exitButton.getPreferredSize());

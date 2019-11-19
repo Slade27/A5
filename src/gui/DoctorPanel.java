@@ -5,7 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import commands.AddPatient;
 import commands.DropDoctor;
 import commands.AssignDoctor;
@@ -45,8 +54,15 @@ public class DoctorPanel extends JPanel {
      *        done
      */
     private void build(Doctor d) {
-        ;
+
         add(new JLabel("Name: " + d.getName()));
+
+        add(new JLabel("  ")); // blank line in the panel for spacing
+        add(new JLabel("Patients"));
+
+        JPanel p = listPatientPanel(d);
+        add(p);
+        p.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
         // add an empty panel to force the add doctor and exit components to the bottom
@@ -58,6 +74,12 @@ public class DoctorPanel extends JPanel {
         add(addDoctorPanel);
         addDoctorPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         addDoctorPanel.setMaximumSize(addDoctorPanel.getPreferredSize());
+
+        PatientAccessPanel accessPanel = new PatientAccessPanel();
+        add(accessPanel);
+        add(Box.createVerticalGlue());
+
+
 
         add(new JLabel("  ")); // blank line in the panel for spacing
         final JButton exitButton = new JButton("Exit");
@@ -74,38 +96,45 @@ public class DoctorPanel extends JPanel {
      * the association of this patient with the doctor.
      *
      * @param doctor a doctor of this patient
-     * @param patient the current patient
+     *  the current patient
      * @return the panel to display the name of the doctor, with a button to remove the
      *         patient-doctor association
      */
-//    private JPanel listDoctorPanel(final BasicDoctor doctor, final Patient patient) {
-//        JPanel doctorPanel = new JPanel();
-//        doctorPanel.add(new JLabel("  "));
-//        doctorPanel.add(new JLabel(doctor.getName()));
-//        JButton removeButton = new JButton("remove");
-//        doctorPanel.add(removeButton);
-//        removeButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent event) {
-//                DropDoctor dropAssoc = new DropDoctor();
-//                dropAssoc.dropAssociation(doctor.getName(), patient.getHealthNumber());
-//                if (dropAssoc.wasSuccessful()) {
-//                    // recreate the panel as it has changed
-//                    removeAll();
-//                    build(patient);
-//                    revalidate();
-//                } else {
-//                    JOptionPane.showMessageDialog(PatientPanel.this, dropAssoc.getErrorMessage());
-//                }
-//            }
-//        });
-//        return doctorPanel;
-//    }
+    private JPanel listPatientPanel(final Doctor doctor) {
+        JPanel doctorPanel = new JPanel();
+        doctorPanel.add(new JLabel("  "));
+        //doctorPanel.add(new JLabel(doctor.toString()));
+        doctorPanel.add(new JLabel("Remove Pat, Enter HN"));
+        final JTextField textField = new JTextField(10);
+        doctorPanel.add(textField);
+        //JButton removeButton = new JButton("remove");
+        //doctorPanel.add(removeButton);
+        textField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+
+
+                String pat = textField.getText();
+                int healthnum = Integer.parseInt(pat);
+                DropDoctor dropAssoc = new DropDoctor();
+                dropAssoc.dropAssociation(doctor.getName(), healthnum);
+                if (dropAssoc.wasSuccessful()) {
+                    // recreate the panel as it has changed
+                    removeAll();
+                    build(doctor);
+                    revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(DoctorPanel.this, dropAssoc.getErrorMessage());
+                }
+            }
+        });
+        return doctorPanel;
+    }
 
     /**
      * A panel to add a doctor-patient association for this doctor. The panel as a prompt to enter
      * the doctor's name, and a field to enter the name.
      *
-     * @param patient the current patient
+     * @param d the current patient
      * @return a panel to associate a new doctor with this patient
      */
 
