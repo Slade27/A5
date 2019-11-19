@@ -19,6 +19,7 @@ public class DoctorAccessPanel extends JPanel {
      */
     JTextField textField;
 
+
     /**
      * Create the panel with the prompt label and text field. If data is entered into the text field
      * that is not a valid int value, a brief error message is entered at the front of the text
@@ -26,6 +27,7 @@ public class DoctorAccessPanel extends JPanel {
      * patient.
      */
     public DoctorAccessPanel() {
+
         JLabel promptLabel = new JLabel("Access Doctor");
         add(promptLabel);
         textField = new JTextField(10);
@@ -36,15 +38,15 @@ public class DoctorAccessPanel extends JPanel {
                 String name;
                 if (valueAsString != null && valueAsString.length() > 0) {
                     try {
-                        name  = valueAsString;
+                        //name  = valueAsString;
                     } catch (NumberFormatException e) {
-                        textField.setText("Not int: " + textField.getText());
-                        textField.revalidate();
-                        return;
-                    }
-                    DoctorFrame frame = null;
+                    textField.setText("Not int: " + textField.getText());
+                    textField.revalidate();
+                    return;
+                }
+                    DoctorFrame frame;
                     try {
-                        frame = new DoctorFrame(name);
+                        frame = new DoctorFrame(valueAsString);
                     } catch (RuntimeException e) {
                         textField.setText("Invalid id: " + textField.getText());
                         textField.revalidate();

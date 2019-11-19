@@ -4,12 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import commands.DropDoctor;
 import commands.AssignDoctor;
@@ -47,8 +42,7 @@ public class DoctorPanel extends JPanel {
      *        done
      */
     private void build(Doctor d) {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        add(new JLabel("Name: " + d.getName()));
+        ;
         //add(new JLabel("Health number: " + patient.getHealthNumber()));
 
 //        BedPanel bedPanel = new BedPanel(patient);
@@ -57,13 +51,6 @@ public class DoctorPanel extends JPanel {
 //        bedPanel.setMaximumSize(bedPanel.getPreferredSize());
 
 
-//        add(new JLabel("  ")); // blank line in the panel for spacing
-//        add(new JLabel("Patients"));
-//        for (BasicDoctor doctor : patient.getDoctors()) {
-//            JPanel p = listDoctorPanel(doctor, patient);
-//            add(p);
-//            p.setAlignmentX(Component.LEFT_ALIGNMENT);
-//        }
 
         // add an empty panel to force the add doctor and exit components to the bottom
         JPanel emptyPanel = new JPanel();

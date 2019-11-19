@@ -44,7 +44,7 @@ public class DoctorOpsPanel extends JPanel {
         });
         add(Box.createVerticalGlue());
 
-        // add a panel with a field to access a specific patient
+        // add a panel with a field to access a specific Doctor
         DoctorAccessPanel accessPanel = new DoctorAccessPanel();
         add(accessPanel);
         add(Box.createVerticalGlue());

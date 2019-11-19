@@ -21,15 +21,16 @@ public class DoctorFrame extends JFrame {
     /**
      * Create the frame to display the information for a patient.
      *
-     * @param healthNum the health number of the patient
+     * @param name the health number of the patient
      * @precond healthNum is the health number of a patient
      */
     public DoctorFrame(String name) {
-        Doctor doctor = DoctorMapAccess.dictionary().get(name);
-        if (name != null) {
-            setTitle(doctor.getName() + " (" + name + ")");
+        Doctor doc = DoctorMapAccess.dictionary().get(name);
+        if (doc != null) {
+            setTitle(doc.getName() + " (" + doc + ")");
             setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-            DoctorPanel panel = new DoctorPanel(doctor);
+            System.out.println(doc+ "HERE");
+            DoctorPanel panel = new DoctorPanel(doc);
             add(panel);
         } else
             throw new RuntimeException("Invalid health number " + name);
