@@ -106,8 +106,8 @@ public class CreateWardPanel extends JPanel {
             if (createWard.wasSuccessful()) {
                 getTopLevelAncestor().setVisible(false);
 
-
-                PatientOpsFrame frame = new PatientOpsFrame(); // Used for assign5 */
+                MainMenu frame = new MainMenu();
+                //PatientOpsFrame frame = new PatientOpsFrame(); // Used for assign5 */
                 frame.setLocation(300, 300);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
