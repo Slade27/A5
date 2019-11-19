@@ -17,7 +17,7 @@ import commands.CreateWard;
 /**
  * The panel to obtain input to initialize the ward, and then it will start the main system.
  */
-public class CreateWardPanel extends JPanel {
+public class MainMenu extends JPanel {
     /**
      * The panel for the entry of the ward's name.
      */
@@ -43,11 +43,11 @@ public class CreateWardPanel extends JPanel {
      * first bed, a field for the label of the last bed, and a submit button to submit the data for
      * the creation of the ward.
      */
-    public CreateWardPanel() {
+    public MainMenu() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(Box.createVerticalGlue());
 
-        JLabel prompt = new JLabel("Enter the ward information");
+        JLabel prompt = new JLabel("Main menu stuff");
         prompt.setMaximumSize(prompt.getPreferredSize());
         add(prompt);
         prompt.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -128,3 +128,4 @@ public class CreateWardPanel extends JPanel {
 
     public static final long serialVersionUID = 1;
 }
+
