@@ -33,7 +33,7 @@ public class DoctorFrame extends JFrame {
             DoctorPanel panel = new DoctorPanel(doc);
             add(panel);
         } else
-            throw new RuntimeException("Invalid health number " + name);
+            throw new RuntimeException("Invalid name " + name);
     }
 
     public static final long serialVersionUID = 1;

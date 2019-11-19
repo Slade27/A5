@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import commands.AddPatient;
 import commands.DropDoctor;
 import commands.AssignDoctor;
 import entities.Doctor;
@@ -43,13 +44,25 @@ public class DoctorPanel extends JPanel {
      */
     private void build(Doctor d) {
         ;
-        //add(new JLabel("Health number: " + patient.getHealthNumber()));
+        add(new JLabel("Name: " + d.getName()));
 
-//        BedPanel bedPanel = new BedPanel(patient);
-//        add(bedPanel);
-//        bedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-//        bedPanel.setMaximumSize(bedPanel.getPreferredSize());
-
+        //BedPanel bedPanel = new BedPanel(patient);
+        //add(bedPanel);
+        //bedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //bedPanel.setMaximumSize(bedPanel.getPreferredSize());
+        JButton addButton = new JButton("Add patient");
+        addButton.setMaximumSize(addButton.getPreferredSize());
+        add(addButton);
+        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                PatientAddFrame frame = new PatientAddFrame();
+                frame.setLocation(300, 300);
+                frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                frame.setVisible(true);
+            }
+        });
+        add(Box.createVerticalGlue());
 
 
         // add an empty panel to force the add doctor and exit components to the bottom
@@ -111,16 +124,16 @@ public class DoctorPanel extends JPanel {
      * @param patient the current patient
      * @return a panel to associate a new doctor with this patient
      */
-//    private JPanel addDoctorPanel(final Patient patient) {
+//    private JPanel addPatientPanel(final Doctor doctor) {
 //        JPanel addDoctorPanel = new JPanel();
 //        addDoctorPanel.add(new JLabel("Add doctor"));
 //        final JTextField textField = new JTextField(10);
 //        addDoctorPanel.add(textField);
 //        textField.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent event) {
-//                String doctorName = textField.getText();
-//                AssignDoctor addAssoc = new AssignDoctor();
-//                addAssoc.assignDoctor(doctorName, patient.getHealthNumber());
+//                String PatName = textField.getText();
+//                AddPatient addAssoc = new AddPatient();
+//                addAssoc.addPatient(PatName, patient.getHealthNumber());
 //                if (addAssoc.wasSuccessful()) {
 //                    // recreate the panel as it has changed
 //                    removeAll();
