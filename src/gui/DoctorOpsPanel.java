@@ -11,50 +11,52 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import containers.PatientMapAccess;
+import containers.DoctorMapAccess;
+import entities.Doctor;
 
 /**
  * The panel for the operations involving patients. There is a button to add a new patient, a field
  * to access a specific patient, a button to list all patients, and an exit button to hide the
  * window with this frame.
  */
-public class MainMenuPanel extends JPanel {
+public class DoctorOpsPanel extends JPanel {
     /**
      * Create the panel for the operations involving patients. There is a button to add a new
      * patient, a field to access a specific patient, a button to list all patients, and an exit
      * button to hide the window with this frame.
      */
-    public MainMenuPanel() {
+    public DoctorOpsPanel() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(Box.createVerticalGlue());
 
         // add a button to add a new patient
-        JButton p = new JButton("Access Patient Stuff");
-        p.setMaximumSize(p.getPreferredSize());
-        add(p);
-        p.setAlignmentX(Component.CENTER_ALIGNMENT);
-        p.addActionListener(new ActionListener() {
+        JButton addButton = new JButton("Add Doctor");
+        addButton.setMaximumSize(addButton.getPreferredSize());
+        add(addButton);
+        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                PatientOpsFrame frame = new PatientOpsFrame(); // Access Patient stuff
+                DoctorOpsAddFrame frame = new DoctorOpsAddFrame();
                 frame.setLocation(300, 300);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 frame.setVisible(true);
             }
         });
         add(Box.createVerticalGlue());
 
+        // add a panel with a field to access a specific patient
+        DoctorAccessPanel accessPanel = new DoctorAccessPanel();
+        add(accessPanel);
+        add(Box.createVerticalGlue());
 
         // add a button to display all the patients
-        JButton doc = new JButton("Access Doctor stuff");
-        doc.setMaximumSize(doc.getPreferredSize());
-        add(doc);
-        doc.setAlignmentX(Component.CENTER_ALIGNMENT);
-        doc.addActionListener(new ActionListener() {
+        JButton listAllButton = new JButton("List all Doctors");
+        listAllButton.setMaximumSize(listAllButton.getPreferredSize());
+        add(listAllButton);
+        listAllButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        listAllButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                DoctorOpsFrame frame = new DoctorOpsFrame(); // Access Patient stuff
-                frame.setLocation(300, 300);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
+                JOptionPane.showMessageDialog(null, DoctorMapAccess.dictionary().values());
             }
         });
         add(Box.createVerticalGlue());
@@ -74,4 +76,3 @@ public class MainMenuPanel extends JPanel {
 
     public static final long serialVersionUID = 1;
 }
-

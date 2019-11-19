@@ -7,7 +7,7 @@ import startup.HospitalSystem;
 /**
  * The frame for the window to display the operations that involve patients.
  */
-public class MainMenu extends JFrame {
+public class DoctorOpsFrame extends JFrame {
     /** The standard width for the frame. */
     public static final int DEFAULT_WIDTH = 350;
 
@@ -15,12 +15,12 @@ public class MainMenu extends JFrame {
     public static final int DEFAULT_HEIGHT = 200;
 
     /**
-     * Create the frame for the operations
+     * Create the frame for the operations that involve patients.
      */
-    public MainMenu() {
-        setTitle("Main menu");
+    public DoctorOpsFrame() {
+        setTitle("Doctor Operations");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        MainMenuPanel panel = new MainMenuPanel();
+        DoctorOpsPanel panel = new DoctorOpsPanel();
         add(panel);
     }
 
@@ -31,7 +31,7 @@ public class MainMenu extends JFrame {
     public static void main(String[] args) {
         HospitalSystem system = new HospitalSystem();
         system.initialize();
-        PatientOpsFrame frame = new PatientOpsFrame();
+        DoctorOpsFrame frame = new DoctorOpsFrame();
         frame.setLocation(300, 300);
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setVisible(true);
@@ -39,3 +39,4 @@ public class MainMenu extends JFrame {
 
     public static final long serialVersionUID = 1;
 }
+
